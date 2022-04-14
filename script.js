@@ -9,6 +9,10 @@
 /* ********************************************* */
 /* globale variabelen die je gebruikt in je game */
 /* ********************************************* */
+const KEY_A = 65;
+const KEY_W = 87;
+const KEY_S = 83;
+const KEY_D = 68;
 
 const SPELEN = 1;
 const GAMEOVER = 2;
@@ -26,7 +30,21 @@ var spelerY = 600; // y-positie van speler
  */
 var beweegAlles = function () {
   // speler
+if(keyIsDown(KEY_A)) {
+  spelerX = spelerX - 1;
+};
 
+if(keyIsDown(KEY_D)) {
+  spelerX = spelerX + 1;
+};
+
+if(keyIsDown(KEY_W)) {
+  spelerY = spelerY - 1;
+};
+
+if(keyIsDown(KEY_S)) {
+  spelerY = spelerY + 1;
+};
   // vijand
 
   // kogel
@@ -58,9 +76,9 @@ var tekenAlles = function () {
 
   // speler
   fill("white");
-  rect(mouseX - 25, mouseY - 25, 50, 50);
+  rect(spelerX - 25, spelerY - 25, 50, 50);
   fill("black");
-  ellipse(mouseX, mouseY, 10, 10);
+  ellipse(spelerX, spelerY, 10, 10);
 
   // punten en health
 
