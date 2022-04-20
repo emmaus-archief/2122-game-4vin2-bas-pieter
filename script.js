@@ -28,22 +28,24 @@ var spelerY = 600; // y-positie van speler
 /**
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
+
+var speed = 50;
 var beweegAlles = function () {
   // speler
 if(keyIsDown(KEY_A)) {
-  spelerX = spelerX - 1;
+  spelerX = spelerX - speed;
 };
 
 if(keyIsDown(KEY_D)) {
-  spelerX = spelerX + 1;
+  spelerX = spelerX + speed;
 };
 
 if(keyIsDown(KEY_W)) {
-  spelerY = spelerY - 1;
+  spelerY = spelerY - speed;
 };
 
 if(keyIsDown(KEY_S)) {
-  spelerY = spelerY + 1;
+  spelerY = spelerY + speed;
 };
   // vijand
 
@@ -76,10 +78,14 @@ var tekenAlles = function () {
 
   // speler
   fill("white");
-  rect(spelerX - 25, spelerY - 25, 50, 50);
+  ellipse(spelerX, spelerY, 50, 50);
   fill("black");
   ellipse(spelerX, spelerY, 10, 10);
-
+  
+  rect(spelerX + 24, spelerY - 5, 10, 10);
+  rect(spelerX - 34, spelerY - 5, 10, 10);
+  rect(spelerX - 5, spelerY + 24, 10, 10);
+  rect(spelerX - 5, spelerY - 34, 10, 10);
   // punten en health
 
 };
@@ -129,3 +135,4 @@ function draw() {
 
   }
 }
+
