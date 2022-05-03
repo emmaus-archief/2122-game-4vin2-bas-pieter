@@ -19,7 +19,7 @@ const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
 var spelerX = 600; // x-positie van speler
-var spelerY = 600; // y-positie van speler
+var spelerY = 550; // y-positie van speler
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -71,13 +71,17 @@ var verwerkBotsing = function () {
  */
 var tekenAlles = function () {
   // achtergrond
-
+  fill("green")
+  rect(0, 600, 1280, 120)
   // vijand
 
   // kogel
 
   // speler
-  fill("white");
+  fill("red")
+  rect(spelerX, spelerY, 30, 50)
+
+  /*  fill("white");
   ellipse(spelerX, spelerY, 50, 50);
   fill("black");
   ellipse(spelerX, spelerY, 10, 10);
@@ -85,7 +89,7 @@ var tekenAlles = function () {
   rect(spelerX + 24, spelerY - 5, 10, 10);
   rect(spelerX - 34, spelerY - 5, 10, 10);
   rect(spelerX - 5, spelerY + 24, 10, 10);
-  rect(spelerX - 5, spelerY - 34, 10, 10);
+  rect(spelerX - 5, spelerY - 34, 10, 10); */
   // punten en health
 
 };
