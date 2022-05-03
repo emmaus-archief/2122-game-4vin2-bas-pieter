@@ -39,8 +39,8 @@ if(keyIsDown(KEY_A)) {
 if(keyIsDown(KEY_D)) {
   spelerX = spelerX + speed;
 };
-/*
-if(keyIsDown(KEY_W)) {
+
+/*if(keyIsDown(KEY_W)) {
   spelerY = spelerY - speed;
 };
 
