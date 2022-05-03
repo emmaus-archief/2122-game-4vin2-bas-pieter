@@ -71,6 +71,8 @@ var verwerkBotsing = function () {
  */
 var tekenAlles = function () {
   // achtergrond
+  fill("blue")
+  rect(0, 0, 1280, 600)
   fill("green")
   rect(0, 600, 1280, 120)
   // vijand
@@ -114,12 +116,12 @@ var checkGameOver = function () {
  */
 function setup() {
   // Maak een canvas (rechthoek) waarin je je speelveld kunt tekenen
-  createCanvas(1280, 720);
+  createCanvas(1280, 720)
 
   // Kleur de achtergrond blauw, zodat je het kunt zien
   background('blue');
   
-}
+} 
 
 /**
  * draw
