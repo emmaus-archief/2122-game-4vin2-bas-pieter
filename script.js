@@ -29,7 +29,7 @@ var spelerY = 550; // y-positie van speler
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
 
-var speed = 50;
+var speed = 3;
 var beweegAlles = function () {
   // speler
 if(keyIsDown(KEY_A)) {
@@ -39,14 +39,14 @@ if(keyIsDown(KEY_A)) {
 if(keyIsDown(KEY_D)) {
   spelerX = spelerX + speed;
 };
-
+/*
 if(keyIsDown(KEY_W)) {
   spelerY = spelerY - speed;
 };
 
 if(keyIsDown(KEY_S)) {
   spelerY = spelerY + speed;
-};
+}; */
   // vijand
 
   // kogel
