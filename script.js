@@ -43,7 +43,7 @@ if(keyIsDown(KEY_D) && spelerX <1250 ) {
   spelerX = spelerX + speed;
 };
 
-if(keyIsDown(KEY_W) && spelerY >0) {
+if(keyIsDown(KEY_W) && spelerY >3) {
   spelerY = spelerY - speed;
 };
 
@@ -85,6 +85,8 @@ var tekenAlles = function () {
   // speler
   fill("red")
   rect(spelerX, spelerY, 30, 50)
+  fill("black")
+  ellipse(spelerX, spelerY, 10, 10)
 
   /*  fill("white");
   ellipse(spelerX, spelerY, 50, 50);
