@@ -32,21 +32,24 @@ var spelerY = 550; // y-positie van speler
 var speed = 3;
 var beweegAlles = function () {
   // speler
-if(keyIsDown(KEY_A)) {
+
+
+if(keyIsDown(KEY_A)&& spelerX >0){
   spelerX = spelerX - speed;
 };
 
-if(keyIsDown(KEY_D)) {
+
+if(keyIsDown(KEY_D) && spelerX <1250 ) {
   spelerX = spelerX + speed;
 };
 
-/*if(keyIsDown(KEY_W)) {
+if(keyIsDown(KEY_W) && spelerY >0) {
   spelerY = spelerY - speed;
 };
 
-if(keyIsDown(KEY_S)) {
+if(keyIsDown(KEY_S) && spelerY <550) {
   spelerY = spelerY + speed;
-}; */
+}; 
   // vijand
 
   // kogel
