@@ -14,9 +14,12 @@ const KEY_W = 87;
 const KEY_S = 83;
 const KEY_D = 68;
 
-const SPELEN = 1;
+const SPELEN1 = 11;
+const SPELEN2 = 12;
+const SPELEN3 = 13;
 const GAMEOVER = 2;
-var spelStatus = SPELEN;
+const START = 3;
+var spelStatus = SPELEN1;
 
 var spelerX = 600; // x-positie van speler
 var spelerY = 550; // y-positie van speler
@@ -29,7 +32,7 @@ var spelerY = 550; // y-positie van speler
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
 
-var speed = 3;
+var speed = 10;
 var beweegAlles = function () {
   // speler
 
@@ -134,7 +137,7 @@ function setup() {
  * uitgevoerd door de p5 library, nadat de setup functie klaar is
  */
 function draw() {
-  if (spelStatus === SPELEN) {
+  if (spelStatus === SPELEN1) {
     beweegAlles();
     verwerkBotsing();
     tekenAlles();
@@ -142,9 +145,19 @@ function draw() {
       spelStatus = GAMEOVER;
     }
   }
+  if (spelStatus === SPELEN2) {
+
+  }
+  if (spelStatus === SPELEN3) {
+    
+  }
+  
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
 
+  }
+  if (spelStatus === START) { //tekent startscherm
+    
   }
 }
 
