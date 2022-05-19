@@ -13,6 +13,7 @@ const KEY_A = 65;
 const KEY_W = 87;
 const KEY_S = 83;
 const KEY_D = 68;
+const KEY_SPACE = 32;
 
 const SPELEN1 = 11;
 const SPELEN2 = 12;
@@ -21,8 +22,12 @@ const GAMEOVER = 2;
 const START = 3;
 var spelStatus = SPELEN1;
 
-var spelerX = 600; // x-positie van speler
-var spelerY = 550; // y-positie van speler
+var spelerX = 615; // x-positie van speler
+var spelerY = 575; // y-positie van speler
+var speed = 10;
+var jumpspeed = 0;
+var jumpstatus = false;
+var botsing = false;
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -32,27 +37,33 @@ var spelerY = 550; // y-positie van speler
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
 
-var speed = 10;
+
 var beweegAlles = function () {
   // speler
 
 
-if(keyIsDown(KEY_A)&& spelerX >0){
+if(keyIsDown(KEY_A)&& spelerX > 15){
   spelerX = spelerX - speed;
 };
 
 
-if(keyIsDown(KEY_D) && spelerX <1250 ) {
+if(keyIsDown(KEY_D) && spelerX < 1265) {
   spelerX = spelerX + speed;
 };
 
-if(keyIsDown(KEY_W) && spelerY >3) {
-  spelerY = spelerY - speed;
-};
 
-if(keyIsDown(KEY_S) && spelerY <550) {
-  spelerY = spelerY + speed;
-}; 
+if(keyIsDown(KEY_SPACE)) {
+  jumpstatus = true;
+  jumpspeed = 10;
+}
+if(jumpstatus === true){
+  spelerY = spelerY - jumpspeed;
+  jumpspeed = jumpspeed - 0.2;
+}
+
+if(botsing === true){
+  jumpspeed = 0
+}
   // vijand
 
   // kogel
@@ -87,7 +98,7 @@ var tekenAlles = function () {
 
   // speler
   fill("red")
-  rect(spelerX, spelerY, 30, 50)
+  rect(spelerX - 15, spelerY - 25, 30, 50)
   fill("black")
   ellipse(spelerX, spelerY, 10, 10)
 
