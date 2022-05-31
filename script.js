@@ -55,16 +55,17 @@ if(keyIsDown(KEY_D) && spelerX < 1265) {
 SpatieklikVorige = SpatieKlik;
 SpatieKlik = keyIsDown(KEY_SPACE);
 
-if(SpatieKlikVorige === false && SpatieKlik === true) {
+if( SpatieKlik === true && jumpstatus === false) {
   jumpstatus = true;
-  jumpspeed = 5;
+  jumpspeed = 10;
 }
 if(jumpstatus === true ){
   spelerY = spelerY - jumpspeed;
   jumpspeed = jumpspeed - 0.2;
 }
-if(spelerY > 570){
+if(jumpstatus === true && spelerY > 570){
   jumpspeed = 0;
+  jumpstatus = false;
 }
 if(botsing === true){
   jumpspeed = 0
