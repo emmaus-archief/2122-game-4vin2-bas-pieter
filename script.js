@@ -28,7 +28,8 @@ var speed = 10;
 var jumpspeed = 0;
 var jumpstatus = false;
 var botsing = false;
-
+var SpatieKlik = false;
+var SpatieKlikVorige = false;
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -51,16 +52,20 @@ if(keyIsDown(KEY_D) && spelerX < 1265) {
   spelerX = spelerX + speed;
 };
 
+SpatieklikVorige = SpatieKlik;
+SpatieKlik = keyIsDown(KEY_SPACE);
 
-if(keyIsDown(KEY_SPACE)) {
+if(SpatieKlikVorige === false && SpatieKlik === true) {
   jumpstatus = true;
-  jumpspeed = 10;
+  jumpspeed = 5;
 }
-if(jumpstatus === true){
+if(jumpstatus === true ){
   spelerY = spelerY - jumpspeed;
   jumpspeed = jumpspeed - 0.2;
 }
-
+if(spelerY > 570){
+  jumpspeed = 0;
+}
 if(botsing === true){
   jumpspeed = 0
 }
