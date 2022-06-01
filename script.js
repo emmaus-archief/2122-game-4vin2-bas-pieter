@@ -22,6 +22,7 @@ const GAMEOVER = 2;
 const START = 3;
 var spelStatus = SPELEN1;
 
+// speler
 var spelerX = 615; // x-positie van speler
 var spelerY = 575; // y-positie van speler
 var speed = 10;
@@ -30,6 +31,10 @@ var jumpstatus = false;
 var botsing = false;
 var SpatieKlik = false;
 var SpatieKlikVorige = false;
+
+// veld
+var platformY = 600;
+
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -63,7 +68,7 @@ if(jumpstatus === true ){
   spelerY = spelerY - jumpspeed;
   jumpspeed = jumpspeed - 0.2;
 }
-if(jumpstatus === true && spelerY > 570){
+if(jumpstatus === true && spelerY > (platformY-30)){
   jumpspeed = 0;
   jumpstatus = false;
 }
@@ -97,7 +102,9 @@ var tekenAlles = function () {
   fill("blue")
   rect(0, 0, 1280, 600)
   fill("green")
-  rect(0, 600, 1280, 120)
+  rect(0, platformY, 1280, 120)
+  fill("green")
+  rect(0, 400, 280, 20)
   // vijand
 
   // kogel
