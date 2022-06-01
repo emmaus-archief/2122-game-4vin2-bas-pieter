@@ -31,6 +31,7 @@ var jumpstatus = false;
 var botsing = false;
 var SpatieKlik = false;
 var SpatieKlikVorige = false;
+var vallen = false;
 
 // veld
 var platformY = 600;
@@ -72,9 +73,14 @@ if(jumpstatus === true && spelerY > (platformY-30)){
   jumpspeed = 0;
   jumpstatus = false;
 }
-if(botsing === true){
-  jumpspeed = 0
+if(jumpstatus === true && spelerY > 375 && spelerY < 380 && spelerX > 0 && spelerX <280 ){
+  jumpspeed = 0;
+  jumpstatus = false;
 }
+if (vallen === true){
+  spelerY = spelerY - 1
+}
+
   // vijand
 
   // kogel
