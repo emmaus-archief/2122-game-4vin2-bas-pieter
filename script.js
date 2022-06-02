@@ -34,7 +34,8 @@ var SpatieKlikVorige = false;
 var vallen = false;
 
 // veld
-var platformY = 600;
+const PlatformX = [100, 200, 300]
+const PlatformY = [100, 200, 300]
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -69,7 +70,7 @@ if(jumpstatus === true ){
   spelerY = spelerY - jumpspeed;
   jumpspeed = jumpspeed - 0.2;
 }
-if(jumpstatus === true && spelerY > (platformY-30)){
+if(jumpstatus === true && spelerY > (570)){
   jumpspeed = 0;
   jumpstatus = false;
 }
@@ -81,6 +82,14 @@ if (vallen === true){
   spelerY = spelerY - 1
 }
 
+/*if(spelerX !== Platform){
+
+   (spelerX - pltform < 10 &&
+   spelerX - pltform > 10) === false
+
+
+  vallen = true;
+} */
   // vijand
 
   // kogel
@@ -108,9 +117,14 @@ var tekenAlles = function () {
   fill("blue")
   rect(0, 0, 1280, 600)
   fill("green")
-  rect(0, platformY, 1280, 120)
-  fill("green")
-  rect(0, 400, 280, 20)
+  rect(0, 600, 1280, 120)
+  
+  // alle platforms
+  for(var i = 0; i < PlatformX.length; i++){
+    fill("green")
+    rect(PlatformX[i], PlatformY[i], 280, 20)
+  }
+
   // vijand
 
   // kogel
