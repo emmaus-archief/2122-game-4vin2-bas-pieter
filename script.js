@@ -15,11 +15,11 @@ const KEY_S = 83;
 const KEY_D = 68;
 const KEY_SPACE = 32;
 
-const SPELEN1 = 11;
-const SPELEN2 = 12;
-const SPELEN3 = 13;
-const GAMEOVER = 2;
-const START = 3;
+const SPELEN1 = 11; // level 1
+const SPELEN2 = 12; // level 2
+const SPELEN3 = 13; // level 3
+const GAMEOVER = 2; // game over scherm
+const START = 3;    // startschem
 var spelStatus = SPELEN1;
 
 // speler
@@ -33,9 +33,7 @@ var SpatieKlik = false;
 var SpatieKlikVorige = false;
 var vallen = false;
 
-// veld
-const PlatformX = [100, 200, 300]
-const PlatformY = [100, 200, 300]
+
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -82,6 +80,8 @@ if (vallen === true){
   spelerY = spelerY - 1
 }
 
+
+
 /*if(spelerX !== Platform){
 
    (spelerX - pltform < 10 &&
@@ -112,7 +112,7 @@ var verwerkBotsing = function () {
 /**
  * Tekent spelscherm
  */
-var tekenAlles = function () {
+var tekenAlles1 = function () {
   // achtergrond
   fill("blue")
   rect(0, 0, 1280, 600)
@@ -120,14 +120,13 @@ var tekenAlles = function () {
   rect(0, 600, 1280, 120)
   
   // alle platforms
+  const PlatformX = [100, 200, 300, 400]
+  const PlatformY = [100, 200, 300, 400]
+
   for(var i = 0; i < PlatformX.length; i++){
     fill("green")
     rect(PlatformX[i], PlatformY[i], 280, 20)
   }
-
-  // vijand
-
-  // kogel
 
   // speler
   fill("red")
@@ -135,27 +134,62 @@ var tekenAlles = function () {
   fill("black")
   ellipse(spelerX, spelerY, 10, 10)
 
-  /*  fill("white");
-  ellipse(spelerX, spelerY, 50, 50);
-  fill("black");
-  ellipse(spelerX, spelerY, 10, 10);
+};
+var tekenAlles2 = function () {
+  // achtergrond
+  fill("blue")
+  rect(0, 0, 1280, 600)
+  fill("green")
+  rect(0, 600, 1280, 120)
   
-  rect(spelerX + 24, spelerY - 5, 10, 10);
-  rect(spelerX - 34, spelerY - 5, 10, 10);
-  rect(spelerX - 5, spelerY + 24, 10, 10);
-  rect(spelerX - 5, spelerY - 34, 10, 10); */
-  // punten en health
+  // alle platforms
+  const PlatformX = [100, 200, 300, 400]
+  const PlatformY = [100, 200, 300, 400]
+
+  for(var i = 0; i < PlatformX.length; i++){
+    fill("green")
+    rect(PlatformX[i], PlatformY[i], 280, 20)
+  }
+
+  // speler
+  fill("red")
+  rect(spelerX - 15, spelerY - 25, 30, 50)
+  fill("black")
+  ellipse(spelerX, spelerY, 10, 10)
 
 };
+var tekenAlles3 = function () {
+  // achtergrond
+  fill("blue")
+  rect(0, 0, 1280, 600)
+  fill("green")
+  rect(0, 600, 1280, 120)
+  
+  // alle platforms
+  const PlatformX = [100, 200, 300, 400]
+  const PlatformY = [100, 200, 300, 400]
 
+  for(var i = 0; i < PlatformX.length; i++){
+    fill("green")
+    rect(PlatformX[i], PlatformY[i], 280, 20)
+  }
+
+  // speler
+  fill("red")
+  rect(spelerX - 15, spelerY - 25, 30, 50)
+  fill("black")
+  ellipse(spelerX, spelerY, 10, 10)
+
+};
 /**
  * return true als het gameover is
  * anders return false
  */
-var checkGameOver = function () {
+ var checkGameOver = function () {
   // check of HP 0 is , of tijd op is, of ...
   return false;
-};
+}; 
+
 
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
@@ -174,6 +208,17 @@ function setup() {
   background('blue');
   
 } 
+//gameover scherm tekenen
+var GameoverScherm = function() {
+    fill(white)
+    rect(0, 0, 1280, 720)
+};
+
+// startscherm tekenen
+var StartScherm = function() {
+  fill(white)
+  rect(0, 0, 1280, 720)
+};
 
 /**
  * draw
@@ -184,24 +229,33 @@ function draw() {
   if (spelStatus === SPELEN1) {
     beweegAlles();
     verwerkBotsing();
-    tekenAlles();
+    tekenAlles1();
     if (checkGameOver()) {
       spelStatus = GAMEOVER;
     }
   }
   if (spelStatus === SPELEN2) {
-
+    beweegAlles();
+    verwerkBotsing();
+    tekenAlles2();
+    if (checkGameOver()) {
+      spelStatus = GAMEOVER;
   }
   if (spelStatus === SPELEN3) {
-    
+    beweegAlles();
+    verwerkBotsing();
+    tekenAlles3();
+    if (checkGameOver()) {
+      spelStatus = GAMEOVER;
   }
   
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
-
+    GameoverScherm();
   }
   if (spelStatus === START) { //tekent startscherm
     
   }
 }
-
+}
+}
