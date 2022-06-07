@@ -15,12 +15,11 @@ const KEY_S = 83;
 const KEY_D = 68;
 const KEY_SPACE = 32;
 
-const SPELEN1 = 11; // level 1
-const SPELEN2 = 12; // level 2
-const SPELEN3 = 13; // level 3
-const GAMEOVER = 2; // game over scherm
-const START = 3;    // startschem
-const UITLEG = 4;   // uitlegscherm
+const SPELEN1   = 11; // level 1
+const SPELEN2   = 12; // level 2
+const SPELEN3   = 13; // level 3
+const GAMEOVER  = 2; // game over scherm
+const START     = 3;    // startschem
 var spelStatus = SPELEN1;
 
 // speler
@@ -169,6 +168,12 @@ var tekenAlles2 = function () {
     rect(PlatformX[i], PlatformY[i], 280, 20)
   }
 
+  // vijand (later iets van spikes)
+  fill("black")
+  rect(vijandX - 15, vijandY - 25, 30, 50)
+  fill("red")
+  ellipse(vijandX, vijandY, 10, 10)
+
   // speler
   fill("red")
   rect(spelerX - 15, spelerY - 25, 30, 50)
@@ -192,6 +197,12 @@ var tekenAlles3 = function () {
     rect(PlatformX[i], PlatformY[i], 280, 20)
   }
 
+  // vijand (later iets van spikes)
+  fill("black")
+  rect(vijandX - 15, vijandY - 25, 30, 50)
+  fill("red")
+  ellipse(vijandX, vijandY, 10, 10)
+
   // speler
   fill("red")
   rect(spelerX - 15, spelerY - 25, 30, 50)
@@ -205,10 +216,7 @@ var tekenAlles3 = function () {
  * anders return false
  */
  var checkGameOver = function () {
-  if(spelerX - vijandX < 35 &&
-    spelerX - vijandX >-35 &&
-    spelerY - vijandY < 50 &&
-    spelerY - vijandY >-50 ) {
+  if(spelerX > 1200) {
       return true;
     }
     
@@ -235,10 +243,11 @@ function setup() {
   
 } 
 //gameover scherm tekenen
-var GameoverScherm = function() {
-    fill(white);
-    rect(0, 0, 1280, 720);
-};
+ var GameoverScherm = function() {
+  textsize(200);
+  fill(white);
+  text("je bent dood :)", 200, 200)
+}; 
 
 // startscherm tekenen
 var StartScherm = function() {
@@ -256,7 +265,7 @@ function draw() {
     beweegAlles();
     verwerkBotsing();
     tekenAlles1();
-    if (checkGameOver(true)) {
+    if (checkGameOver()) {
       spelStatus = GAMEOVER;
     }
   }
@@ -267,6 +276,7 @@ function draw() {
     if (checkGameOver()) {
       spelStatus = GAMEOVER;
   }
+}
   if (spelStatus === SPELEN3) {
     beweegAlles();
     verwerkBotsing();
@@ -274,21 +284,16 @@ function draw() {
     if (checkGameOver()) {
       spelStatus = GAMEOVER;
   }
-  
+}
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
     GameoverScherm();
+    
 
-  }
-
-  if (spelStatus === UITLEG) {
-    // teken uitleg scherm
-    UitlegScherm();
   }
 
   if (spelStatus === START) { //tekent startscherm
     
   }
 }
-}
-}
+
