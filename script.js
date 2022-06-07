@@ -33,6 +33,8 @@ var SpatieKlik = false;
 var SpatieKlikVorige = false;
 var vallen = false;
 
+var vijandX = 715; // x-positie van vijand
+var vijandY = 575; // y-positie van vijand
 
 
 /* ********************************************* */
@@ -92,6 +94,8 @@ if (vallen === true){
 } */
   // vijand
 
+
+
   // kogel
 };
 
@@ -103,6 +107,12 @@ if (vallen === true){
 var verwerkBotsing = function () {
   // botsing speler tegen vijand
 
+  if(spelerX - vijandX < 50 &&
+     spelerX - vijandX >-50 &&
+     spelerY - vijandY < 50 &&
+     spelerY - vijandY >-50 ) {
+
+     }
   // botsing kogel tegen vijand
 
   // update punten en health
@@ -128,6 +138,12 @@ var tekenAlles1 = function () {
     rect(PlatformX[i], PlatformY[i], 280, 20)
   }
 
+  // vijand (later iets van spikes)
+  fill("black")
+  rect(vijandX - 15, vijandY - 25, 30, 50)
+  fill("red")
+  ellipse(vijandX, vijandY, 10, 10)
+
   // speler
   fill("red")
   rect(spelerX - 15, spelerY - 25, 30, 50)
@@ -135,6 +151,7 @@ var tekenAlles1 = function () {
   ellipse(spelerX, spelerY, 10, 10)
 
 };
+
 var tekenAlles2 = function () {
   // achtergrond
   fill("blue")
@@ -179,6 +196,7 @@ var tekenAlles3 = function () {
   rect(spelerX - 15, spelerY - 25, 30, 50)
   fill("black")
   ellipse(spelerX, spelerY, 10, 10)
+
 
 };
 /**
