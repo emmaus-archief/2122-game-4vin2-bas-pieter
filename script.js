@@ -20,6 +20,7 @@ const SPELEN2 = 12; // level 2
 const SPELEN3 = 13; // level 3
 const GAMEOVER = 2; // game over scherm
 const START = 3;    // startschem
+const UITLEG = 4;   // uitlegscherm
 var spelStatus = SPELEN1;
 
 // speler
@@ -107,8 +108,8 @@ if (vallen === true){
 var verwerkBotsing = function () {
   // botsing speler tegen vijand
 
-  if(spelerX - vijandX < 50 &&
-     spelerX - vijandX >-50 &&
+  if(spelerX - vijandX < 35 &&
+     spelerX - vijandX >-35 &&
      spelerY - vijandY < 50 &&
      spelerY - vijandY >-50 ) {
 
@@ -204,6 +205,13 @@ var tekenAlles3 = function () {
  * anders return false
  */
  var checkGameOver = function () {
+  if(spelerX - vijandX < 35 &&
+    spelerX - vijandX >-35 &&
+    spelerY - vijandY < 50 &&
+    spelerY - vijandY >-50 ) {
+      return true;
+    }
+    
   // check of HP 0 is , of tijd op is, of ...
   return false;
 }; 
@@ -228,14 +236,14 @@ function setup() {
 } 
 //gameover scherm tekenen
 var GameoverScherm = function() {
-    fill(white)
-    rect(0, 0, 1280, 720)
+    fill(white);
+    rect(0, 0, 1280, 720);
 };
 
 // startscherm tekenen
 var StartScherm = function() {
-  fill(white)
-  rect(0, 0, 1280, 720)
+  fill(white);
+  rect(0, 0, 1280, 720);
 };
 
 /**
@@ -248,7 +256,7 @@ function draw() {
     beweegAlles();
     verwerkBotsing();
     tekenAlles1();
-    if (checkGameOver()) {
+    if (checkGameOver(true)) {
       spelStatus = GAMEOVER;
     }
   }
@@ -270,7 +278,14 @@ function draw() {
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
     GameoverScherm();
+
   }
+
+  if (spelStatus === UITLEG) {
+    // teken uitleg scherm
+    UitlegScherm();
+  }
+
   if (spelStatus === START) { //tekent startscherm
     
   }
