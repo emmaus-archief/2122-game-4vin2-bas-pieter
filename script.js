@@ -21,7 +21,7 @@ const SPELEN2   = 12; // level 2
 const SPELEN3   = 13; // level 3
 const GAMEOVER  = 2; // game over scherm
 const START     = 3;    // startschem
-var spelStatus = SPELEN1;
+var spelStatus = START;
 
 // speler
 var spelerX = 615; // x-positie van speler
@@ -236,9 +236,23 @@ function setup() {
 
 // startscherm tekenen
 var StartScherm = function() {
+  fill("red");
+  rect(0,0,1280,720);
   textSize(50);
   fill("white");
-  text("kies je level", )
+  text("Jump King", 500, 100 )
+  fill("white");
+  var x=175
+  while(x<=850) {
+  rect(x, 220, 210, 100);
+  x+=325; }
+  fill("black");
+  text("level 1", 205, 285 );
+  text("level 2", 530, 285 );
+  text("level 3", 855, 285 );
+ 
+  fill("white");
+  rect(385,400,440,100);
 };
 
 /**
@@ -278,8 +292,13 @@ function draw() {
 
   }
 
-  if (spelStatus === START) { //tekent startscherm
-    
+  if (spelStatus === START) { 
+    //tekent startscherm
+    StartScherm();
+    if(mouseIsPressed && mouseX < 100) {
+      spelStatus = SPELEN1;
+    };
+
   }
 }
 
