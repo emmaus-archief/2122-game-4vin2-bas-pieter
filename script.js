@@ -14,6 +14,7 @@ const KEY_W = 87;
 const KEY_S = 83;
 const KEY_D = 68;
 const KEY_SPACE = 32;
+const KEY_ENTER = 13;
 
 const SPELEN1   = 11; // level 1
 const SPELEN2   = 12; // level 2
@@ -104,20 +105,7 @@ if (vallen === true){
  * Verwijdert neergeschoten dingen
  * Updatet globale variabelen punten en health
  */
-var verwerkBotsing = function () {
-  // botsing speler tegen vijand
 
-  if(spelerX - vijandX < 35 &&
-     spelerX - vijandX >-35 &&
-     spelerY - vijandY < 50 &&
-     spelerY - vijandY >-50 ) {
-
-     }
-  // botsing kogel tegen vijand
-
-  // update punten en health
-
-};
 
 /**
  * Tekent spelscherm
@@ -168,6 +156,8 @@ var tekenAlles2 = function () {
     rect(PlatformX[i], PlatformY[i], 280, 20)
   }
 
+
+
   // vijand (later iets van spikes)
   fill("black")
   rect(vijandX - 15, vijandY - 25, 30, 50)
@@ -215,8 +205,13 @@ var tekenAlles3 = function () {
  * return true als het gameover is
  * anders return false
  */
+
  var checkGameOver = function () {
-  if(spelerX > 1200) {
+  if(spelerX - vijandX < 35 &&
+     spelerX - vijandX > -35 &&
+     spelerY - vijandY < 50 &&
+     spelerY - vijandY > -50) {
+       console.log("botsing");
       return true;
     }
     
@@ -242,16 +237,23 @@ function setup() {
   background('blue');
   
 } 
+
+
+
 //gameover scherm tekenen
  var GameoverScherm = function() {
-  textsize(200);
-  fill(white);
+  textSize(50);
+  fill("white");
   text("je bent dood :)", 200, 200)
+
+  if(keyIsDown(KEY_ENTER)){
+    spelStatus = START
+  };
 }; 
 
 // startscherm tekenen
 var StartScherm = function() {
-  fill(white);
+  fill("white");
   rect(0, 0, 1280, 720);
 };
 
@@ -263,7 +265,7 @@ var StartScherm = function() {
 function draw() {
   if (spelStatus === SPELEN1) {
     beweegAlles();
-    verwerkBotsing();
+    checkGameOver();
     tekenAlles1();
     if (checkGameOver()) {
       spelStatus = GAMEOVER;
@@ -271,16 +273,16 @@ function draw() {
   }
   if (spelStatus === SPELEN2) {
     beweegAlles();
-    verwerkBotsing();
     tekenAlles2();
+    checkGameOver();
     if (checkGameOver()) {
       spelStatus = GAMEOVER;
   }
 }
   if (spelStatus === SPELEN3) {
     beweegAlles();
-    verwerkBotsing();
     tekenAlles3();
+    checkGameOver();
     if (checkGameOver()) {
       spelStatus = GAMEOVER;
   }
