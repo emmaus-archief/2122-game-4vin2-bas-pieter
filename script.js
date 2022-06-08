@@ -75,29 +75,12 @@ if(jumpstatus === true && spelerY > (570)){
   jumpspeed = 0;
   jumpstatus = false;
 }
-if(jumpstatus === true && spelerY > 375 && spelerY < 380 && spelerX > 0 && spelerX <280 ){
-  jumpspeed = 0;
-  jumpstatus = false;
-}
+
+
 if (vallen === true){
   spelerY = spelerY - 1
 }
 
-
-
-/*if(spelerX !== Platform){
-
-   (spelerX - pltform < 10 &&
-   spelerX - pltform > 10) === false
-
-
-  vallen = true;
-} */
-  // vijand
-
-
-
-  // kogel
 };
 
 /**
@@ -110,102 +93,110 @@ if (vallen === true){
 /**
  * Tekent spelscherm
  */
+
+//level 1
 var tekenAlles1 = function () {
-  // achtergrond
-  fill("blue")
-  rect(0, 0, 1280, 600)
-  fill("green")
-  rect(0, 600, 1280, 120)
-  
   // alle platforms
   const PlatformX = [100, 200, 300, 400]
   const PlatformY = [100, 200, 300, 400]
-
-  for(var i = 0; i < PlatformX.length; i++){
+  
+    // achtergrond
+    fill("blue")
+    rect(0, 0, 1280, 600)
     fill("green")
-    rect(PlatformX[i], PlatformY[i], 280, 20)
-  }
+    rect(0, 600, 1280, 120)
+  
+    for(var i = 0; i < PlatformX.length; i++){
+      fill("green")
+      rect(PlatformX[i], PlatformY[i], 280, 20)
+    };
+  
+    // vijand (later iets van spikes)
+    fill("black")
+    rect(vijandX - 15, vijandY - 25, 30, 50)
+    fill("red")
+    ellipse(vijandX, vijandY, 10, 10)
+  
+      // speler
+    fill("red")
+    rect(spelerX - 15, spelerY - 25, 30, 50)
+    fill("black")
+    ellipse(spelerX, spelerY, 10, 10)
 
-  // vijand (later iets van spikes)
-  fill("black")
-  rect(vijandX - 15, vijandY - 25, 30, 50)
-  fill("red")
-  ellipse(vijandX, vijandY, 10, 10)
-
-  // speler
-  fill("red")
-  rect(spelerX - 15, spelerY - 25, 30, 50)
-  fill("black")
-  ellipse(spelerX, spelerY, 10, 10)
-
+    //op platform staan, moet hier door lokale variabelen PlatformX,Y
+    if( jumpstatus === true && 
+      spelerX - PlatformX > 50  &&  
+      spelerX - PlatformX < 50 && 
+      spelerY - PlatformY > 10 && 
+      spelerY - PlatformY < 10){
+    jumpspeed = 0;
+    jumpstatus = false;
+  };
 };
 
+//level 2
 var tekenAlles2 = function () {
-  // achtergrond
-  fill("blue")
-  rect(0, 0, 1280, 600)
-  fill("green")
-  rect(0, 600, 1280, 120)
-  
   // alle platforms
   const PlatformX = [100, 200, 300, 400]
   const PlatformY = [100, 200, 300, 400]
-
-  for(var i = 0; i < PlatformX.length; i++){
+  
+    // achtergrond
+    fill("blue")
+    rect(0, 0, 1280, 600)
     fill("green")
-    rect(PlatformX[i], PlatformY[i], 280, 20)
-  }
-
-
-
-  // vijand (later iets van spikes)
-  fill("black")
-  rect(vijandX - 15, vijandY - 25, 30, 50)
-  fill("red")
-  ellipse(vijandX, vijandY, 10, 10)
-
-  // speler
-  fill("red")
-  rect(spelerX - 15, spelerY - 25, 30, 50)
-  fill("black")
-  ellipse(spelerX, spelerY, 10, 10)
+    rect(0, 600, 1280, 120)
+  
+    for(var i = 0; i < PlatformX.length; i++){
+      fill("green")
+      rect(PlatformX[i], PlatformY[i], 280, 20)
+    }
+  
+    // vijand (later iets van spikes)
+    fill("black")
+    rect(vijandX - 15, vijandY - 25, 30, 50)
+    fill("red")
+    ellipse(vijandX, vijandY, 10, 10)
+  
+      // speler
+    fill("red")
+    rect(spelerX - 15, spelerY - 25, 30, 50)
+    fill("black")
+    ellipse(spelerX, spelerY, 10, 10)
+ 
 
 };
+
+//level 3
 var tekenAlles3 = function () {
-  // achtergrond
-  fill("blue")
-  rect(0, 0, 1280, 600)
-  fill("green")
-  rect(0, 600, 1280, 120)
-  
   // alle platforms
   const PlatformX = [100, 200, 300, 400]
   const PlatformY = [100, 200, 300, 400]
-
-  for(var i = 0; i < PlatformX.length; i++){
+  
+    // achtergrond
+    fill("blue")
+    rect(0, 0, 1280, 600)
     fill("green")
-    rect(PlatformX[i], PlatformY[i], 280, 20)
-  }
-
-  // vijand (later iets van spikes)
-  fill("black")
-  rect(vijandX - 15, vijandY - 25, 30, 50)
-  fill("red")
-  ellipse(vijandX, vijandY, 10, 10)
-
-  // speler
-  fill("red")
-  rect(spelerX - 15, spelerY - 25, 30, 50)
-  fill("black")
-  ellipse(spelerX, spelerY, 10, 10)
-
-
+    rect(0, 600, 1280, 120)
+  
+    for(var i = 0; i < PlatformX.length; i++){
+      fill("green")
+      rect(PlatformX[i], PlatformY[i], 280, 20)
+    }
+  
+    // vijand (later iets van spikes)
+    fill("black")
+    rect(vijandX - 15, vijandY - 25, 30, 50)
+    fill("red")
+    ellipse(vijandX, vijandY, 10, 10)
+  
+      // speler
+    fill("red")
+    rect(spelerX - 15, spelerY - 25, 30, 50)
+    fill("black")
+    ellipse(spelerX, spelerY, 10, 10)
 };
-/**
- * return true als het gameover is
- * anders return false
- */
 
+//geeft true als vijand geraakt wordt
  var checkGameOver = function () {
   if(spelerX - vijandX < 35 &&
      spelerX - vijandX > -35 &&
@@ -214,8 +205,6 @@ var tekenAlles3 = function () {
        console.log("botsing");
       return true;
     }
-    
-  // check of HP 0 is , of tijd op is, of ...
   return false;
 }; 
 
@@ -230,31 +219,26 @@ var tekenAlles3 = function () {
  * de p5 library, zodra het spel geladen is in de browser
  */
 function setup() {
-  // Maak een canvas (rechthoek) waarin je je speelveld kunt tekenen
   createCanvas(1280, 720)
-
-  // Kleur de achtergrond blauw, zodat je het kunt zien
   background('blue');
-  
 } 
-
-
 
 //gameover scherm tekenen
  var GameoverScherm = function() {
   textSize(50);
   fill("white");
-  text("je bent dood :)", 200, 200)
+  text("je bent dood :)", 200, 200);
 
-  if(keyIsDown(KEY_ENTER)){
-    spelStatus = START
+  if(keyIsDown(KEY_ENTER)) {
+    spelStatus = START;
   };
 }; 
 
 // startscherm tekenen
 var StartScherm = function() {
+  textSize(50);
   fill("white");
-  rect(0, 0, 1280, 720);
+  text("kies je level", )
 };
 
 /**
