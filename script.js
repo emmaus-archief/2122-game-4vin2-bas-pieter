@@ -101,17 +101,6 @@ if(vallen === true ){
 
 };
 
-/**
- * Checkt botsingen
- * Verwijdert neergeschoten dingen
- * Updatet globale variabelen punten en health
- */
-
-
-/**
- * Tekent spelscherm
- */
-
 //level 1
 var tekenAlles1 = function () {
   // achtergrond
@@ -141,20 +130,24 @@ for(var i = 0; i < PlatformX.length; i++){
     }
 
     //vallen, moet ook hier door de array
-    if(staan === true && 
-      spelerX > PlatformX[i] &&  
+    if(staan === true &&   
       spelerX < PlatformX[i] && 
-      spelerY - PlatformY[i] > -23 && 
-      spelerY - PlatformY[i] < -40){
+      spelerY < PlatformY[i] + 5 && 
+      spelerY > PlatformY[i] - 10){
         console.log("vallen")
         vallen = true;
+      }
+      if(staan === true && 
+        spelerX > PlatformX[i] + PlatformBreedte &&  
+        spelerY < PlatformY[i] + 5 && 
+        spelerY > PlatformY[i] - 10){
+          console.log("vallen")
+          vallen = true;
+        }
+      if(spelerX > PlatformX[i] + PlatformBreedte && spelerY < PlatformY[i] + 5 && spelerY < PlatformY[i] - 10){
+        console.log("X werkt")
+      }
       
-      };
-    
-      if (vallen === true){
-        spelerY = spelerY - 1
-      };
-    
     }
 
      // vijand (later iets van spikes)
