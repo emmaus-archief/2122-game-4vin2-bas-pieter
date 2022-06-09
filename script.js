@@ -76,22 +76,27 @@ if(jumpstatus === true ){
   spelerY = spelerY - jumpspeed;
   jumpspeed = jumpspeed - 0.2;
 }
-if(jumpstatus === true && spelerY > (570)){
+if((jumpstatus === true || vallen === true) && spelerY > (570)){
   jumpspeed = 0;
   jumpstatus = false;
   vallen = false;
   valSnelheid = 0;
+  staan = true;
 }
 //stop met springen als die boven is
-if(jumpspeed < 0){
+if(jumpspeed === 0 && jumpstatus === true){
   jumpstatus = false;
   vallen = true;
 }
+
+
 //zwaartekracht
-if(vallen === true){
+if(vallen === true ){
   spelerY = spelerY - valSnelheid;
   valSnelheid = valSnelheid - 0.2;
+  console.log("vallen")
 }
+
 
 };
 
@@ -110,7 +115,7 @@ if(vallen === true){
 var tekenAlles1 = function () {
   // achtergrond
   fill("blue")
-  rect(0, -69*720, 1280, 600+69*720)
+  rect(0, -10*720, 1280, 600+10*720)
   fill("green")
   rect(0, 600, 1280, 120)
 
@@ -170,13 +175,13 @@ for(var i = 0; i < PlatformX.length; i++){
 var tekenAlles2 = function () {
   // achtergrond
   fill("blue")
-  rect(0, 0, 1280, 600)
+  rect(0, -10*720, 1280, 600+10*720)
   fill("green")
   rect(0, 600, 1280, 120)
 
   // alle platforms
-const PlatformX = [100, 350, 700]
-const PlatformY = [400, 300, 400]
+const PlatformX = [0  , 350, 700, 0   , 350 , 700 , 0   , 350 ]
+const PlatformY = [400, 200, 0  , -200, -400, -600, -800, -1000]
 
 for(var i = 0; i < PlatformX.length; i++){
     fill("green")
@@ -196,14 +201,12 @@ for(var i = 0; i < PlatformX.length; i++){
 
     //vallen, moet ook hier door de array
     if(staan === true && 
-      spelerX > PlatformX[i] &&  
-      spelerX < PlatformX[i] && 
-      spelerY - PlatformY[i] > -23 && 
-      spelerY - PlatformY[i] < -40){
+      spelerX > PlatformX[i] + PlatformBreedte &&  
+      spelerX < PlatformX[i]  ){
         console.log("vallen")
         vallen = true;
-      
-      };
+        staan = false;
+      }
     
       if (vallen === true){
         spelerY = spelerY - 1
@@ -231,7 +234,7 @@ var tekenAlles3 = function () {
   fill("blue")
   rect(0, 0, 1280, 600)
   fill("green")
-  rect(0, 600, 1280, 120)
+  rect(0, 600, 1280, 200)
 
   // alle platforms
 const PlatformX = [100, 350, 700]
@@ -298,7 +301,7 @@ for(var i = 0; i < PlatformX.length; i++){
 
 function moveLevel(){ 
   if (spelerY > 360); 
-  translate( 0, 660 - spelerY);
+  translate( 0, 500 - spelerY);
  }
 
 /* ********************************************* */
@@ -412,6 +415,7 @@ function draw() {
     }
   }
   if (spelStatus === SPELEN2) {
+    moveLevel();
     beweegAlles();
     tekenAlles2();
     checkGameOver();
@@ -420,6 +424,7 @@ function draw() {
   }
 }
   if (spelStatus === SPELEN3) {
+    moveLevel();
     beweegAlles();
     tekenAlles3();
     checkGameOver();
