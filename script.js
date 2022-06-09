@@ -19,8 +19,9 @@ const KEY_ENTER = 13;
 const SPELEN1   = 11; // level 1
 const SPELEN2   = 12; // level 2
 const SPELEN3   = 13; // level 3
-const GAMEOVER  = 2; // game over scherm
-const START     = 3;    // startschem
+const GAMEOVER  = 2;  // game over scherm
+const START     = 3;  // startschem
+const HULP      = 4;  // hulpmenu
 var spelStatus = START;
 
 // speler
@@ -117,7 +118,7 @@ var tekenAlles1 = function () {
   fill("blue")
   rect(0, -10*720, 1280, 600+10*720)
   fill("green")
-  rect(0, 600, 1280, 120)
+  rect(0, 600, 1280, 220)
 
   // alle platforms
 const PlatformX = [100, 350, 700]
@@ -177,7 +178,7 @@ var tekenAlles2 = function () {
   fill("blue")
   rect(0, -10*720, 1280, 600+10*720)
   fill("green")
-  rect(0, 600, 1280, 120)
+  rect(0, 600, 1280, 220)
 
   // alle platforms
 const PlatformX = [0  , 350, 700, 0   , 350 , 700 , 0   , 350 ]
@@ -232,9 +233,9 @@ for(var i = 0; i < PlatformX.length; i++){
 var tekenAlles3 = function () {
   // achtergrond
   fill("blue")
-  rect(0, 0, 1280, 600)
+  rect(0, -10*720, 1280, 600+10*720)
   fill("green")
-  rect(0, 600, 1280, 200)
+  rect(0, 600, 1280, 220)
 
   // alle platforms
 const PlatformX = [100, 350, 700]
@@ -318,6 +319,7 @@ function setup() {
   background('blue');
 } 
 
+
 //gameover scherm tekenen
  var GameoverScherm = function() {
   fill("red");
@@ -332,15 +334,46 @@ function setup() {
   rect(375, y, 450, 100);
   y+=125; }
   fill("black");
-  text("level 1", 205, 285 );
-  text("level 2", 530, 285 );
-  text("level 3", 855, 285 );
+  text("opnieuw proberen", 400, 285 );
+  text("naar hoofdmenu", 418, 405 );
+  text("naar hulpmenu", 430, 535 );
 
+   // opnieuw proberen
 
-  if(keyIsDown(KEY_ENTER)) {
+  if(mouseIsPressed && 
+    mouseX < 825 &&
+    mouseX > 375 &&
+    mouseY < 320 &&
+    mouseY > 220 ) {
+    spelStatus = SPELEN1;
+  };
+
+  //naar startmenu gaan
+
+  if(mouseIsPressed && 
+    mouseX < 825 &&
+    mouseX > 375 &&
+    mouseY < 445 &&
+    mouseY > 345 ) {
     spelStatus = START;
   };
+
+  //naar hulpmenu gaan
+  if(mouseIsPressed && 
+    mouseX < 825 &&
+    mouseX > 325 &&
+    mouseY < 570 &&
+    mouseY > 470 ) {
+    spelStatus = HULP;
+  };
+
 }; 
+
+// hulpscherm tekenen
+
+var HulpScherm = function() {
+
+}
 
 // startscherm tekenen
 var StartScherm = function() {
@@ -414,6 +447,7 @@ function draw() {
       spelStatus = GAMEOVER;
     }
   }
+
   if (spelStatus === SPELEN2) {
     moveLevel();
     beweegAlles();
@@ -421,8 +455,9 @@ function draw() {
     checkGameOver();
     if (checkGameOver()) {
       spelStatus = GAMEOVER;
+    }
   }
-}
+
   if (spelStatus === SPELEN3) {
     moveLevel();
     beweegAlles();
@@ -430,20 +465,22 @@ function draw() {
     checkGameOver();
     if (checkGameOver()) {
       spelStatus = GAMEOVER;
+    }
   }
-}
+
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
     GameoverScherm();
-    
-
   }
 
   if (spelStatus === START) { 
     //tekent startscherm
     StartScherm();
+  }
 
-
+  if (spelStatus === HULP) {
+    //tekent hulpscherm
+    HulpScherm();
   }
 }
 
