@@ -96,7 +96,7 @@ if(jumpstatus === true && spelerY > (570)){
 var tekenAlles1 = function () {
   // achtergrond
   fill("blue")
-  rect(0, 0, 1280, 600)
+  rect(0, -69*720, 1280, 600+69*720)
   fill("green")
   rect(0, 600, 1280, 120)
 
@@ -282,6 +282,10 @@ for(var i = 0; i < PlatformX.length; i++){
   return false;
 }; 
 
+function moveLevel(){ 
+  if (spelerY > 360); 
+  translate( 0, 660 - spelerY);
+ }
 
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
@@ -385,6 +389,7 @@ var StartScherm = function() {
  */
 function draw() {
   if (spelStatus === SPELEN1) {
+    moveLevel();
     beweegAlles();
     checkGameOver();
     tekenAlles1();
