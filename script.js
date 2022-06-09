@@ -373,7 +373,41 @@ function setup() {
 
 var HulpScherm = function() {
 
+  // achtergrond
+  fill("red");
+  rect(0,0,1280,720);
+
+  // titel hulp
+  textSize(50);
+  fill("white");
+  text("hulpmenu", 490, 100 )
+
+  // informatie
+  fill("white");
+  var y=220
+  while (y<=550) {
+  rect(75, y, 450, 100);
+  y+=125; }
+  fill("black");
+  text("A is naar links", 100, 285 );
+  text("D is naar rechts", 100, 405 );
+  text("Spatie is springen", 100, 535 );
+
+  fill('white');
+  rect(600, 345, 450, 100);
+  fill('black');
+  text("naar hoodmenu", 610, 410)
+
+  if(mouseIsPressed && 
+    mouseX < 1050 &&
+    mouseX > 600 &&
+    mouseY < 450 &&
+    mouseY > 345 ) {
+    spelStatus = START;
+  };
 }
+
+
 
 // startscherm tekenen
 var StartScherm = function() {
@@ -401,6 +435,8 @@ var StartScherm = function() {
   // de hulpknop
   fill("white");
   rect(385,400,440,100);
+  fill('black');
+  text("naar hulpmenu", 420, 460)
 
   // level 1 aanklikken
 
