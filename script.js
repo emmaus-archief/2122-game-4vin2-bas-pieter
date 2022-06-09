@@ -22,6 +22,7 @@ const SPELEN3   = 13; // level 3
 const GAMEOVER  = 2;  // game over scherm
 const START     = 3;  // startschem
 const HULP      = 4;  // hulpmenu
+const FINISH    = 5;  // finish
 var spelStatus = START;
 
 // speler
@@ -70,10 +71,10 @@ SpatieKlik = keyIsDown(KEY_SPACE);
 
 if( SpatieKlik === true && jumpstatus === false) {
   jumpstatus = true;
-  jumpspeed = 10;
+  jumpspeed = 20;
   staan = false;
 }
-if(jumpstatus === true ){
+if(jumpstatus === true && jumpspeed > 0){
   spelerY = spelerY - jumpspeed;
   jumpspeed = jumpspeed - 0.2;
 }
@@ -85,14 +86,17 @@ if((jumpstatus === true || vallen === true) && spelerY > (570)){
   staan = true;
 }
 //stop met springen als die boven is
-if(jumpspeed === 0 && jumpstatus === true){
+if(jumpspeed === 0 ){
   jumpstatus = false;
   vallen = true;
 }
 
+if(vallen === true){
+  console.log("vallen")
+}
 
 //zwaartekracht
-if(vallen === true ){
+if(vallen === true && staan === false){
   spelerY = spelerY - valSnelheid;
   valSnelheid = valSnelheid - 0.2;
   console.log("vallen")
@@ -122,31 +126,25 @@ for(var i = 0; i < PlatformX.length; i++){
     if(spelerX - PlatformX[i] < 295  &&  
        spelerX - PlatformX[i] > -15 && 
        spelerY - PlatformY[i] < -23 && 
-       spelerY - PlatformY[i] > -25){
+       spelerY - PlatformY[i] > -30){
     jumpspeed = 0;
     jumpstatus = false;
     console.log("staan")
     staan = true;
+    } else {
+      staan = false;
+      console.log("staanuit")
     }
 
     //vallen, moet ook hier door de array
-    if(staan === true &&   
+    /* if(staan === true &&   
       spelerX < PlatformX[i] && 
       spelerY < PlatformY[i] + 5 && 
       spelerY > PlatformY[i] - 10){
         console.log("vallen")
         vallen = true;
-      }
-      if(staan === true && 
-        spelerX > PlatformX[i] + PlatformBreedte &&  
-        spelerY < PlatformY[i] + 5 && 
-        spelerY > PlatformY[i] - 10){
-          console.log("vallen")
-          vallen = true;
-        }
-      if(spelerX > PlatformX[i] + PlatformBreedte && spelerY < PlatformY[i] + 5 && spelerY < PlatformY[i] - 10){
-        console.log("X werkt")
-      }
+      } */
+      
       
     }
 
@@ -526,6 +524,11 @@ function draw() {
   if (spelStatus === HULP) {
     //tekent hulpscherm
     HulpScherm();
+  }
+
+  if(spelStatus === FINISH) {
+    //tekent finish scherm
+
   }
 }
 
