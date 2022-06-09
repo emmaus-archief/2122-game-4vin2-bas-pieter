@@ -26,6 +26,7 @@ var spelStatus = START;
 // speler
 var spelerX = 615; // x-positie van speler
 var spelerY = 575; // y-positie van speler
+//alle andere dingen
 var speed = 10;
 var jumpspeed = 0;
 var jumpstatus = false;
@@ -33,7 +34,8 @@ var botsing = false;
 var SpatieKlik = false;
 var SpatieKlikVorige = false;
 var vallen = false;
-
+var staan = false;
+var PlatformBreedte = 280;
 var vijandX = 715; // x-positie van vijand
 var vijandY = 575; // y-positie van vijand
 
@@ -66,6 +68,7 @@ SpatieKlik = keyIsDown(KEY_SPACE);
 if( SpatieKlik === true && jumpstatus === false) {
   jumpstatus = true;
   jumpspeed = 10;
+  staan = false;
 }
 if(jumpstatus === true ){
   spelerY = spelerY - jumpspeed;
@@ -74,11 +77,6 @@ if(jumpstatus === true ){
 if(jumpstatus === true && spelerY > (570)){
   jumpspeed = 0;
   jumpstatus = false;
-}
-
-
-if (vallen === true){
-  spelerY = spelerY - 1
 }
 
 };
@@ -96,43 +94,63 @@ if (vallen === true){
 
 //level 1
 var tekenAlles1 = function () {
-  // alle platforms
-  const PlatformX = [100, 200, 300, 400]
-  const PlatformY = [100, 200, 300, 400]
-  
-    // achtergrond
-    fill("blue")
-    rect(0, 0, 1280, 600)
-    fill("green")
-    rect(0, 600, 1280, 120)
-  
-    for(var i = 0; i < PlatformX.length; i++){
-      fill("green")
-      rect(PlatformX[i], PlatformY[i], 280, 20)
-    };
-  
-    // vijand (later iets van spikes)
-    fill("black")
-    rect(vijandX - 15, vijandY - 25, 30, 50)
-    fill("red")
-    ellipse(vijandX, vijandY, 10, 10)
-  
-      // speler
-    fill("red")
-    rect(spelerX - 15, spelerY - 25, 30, 50)
-    fill("black")
-    ellipse(spelerX, spelerY, 10, 10)
+  // achtergrond
+  fill("blue")
+  rect(0, 0, 1280, 600)
+  fill("green")
+  rect(0, 600, 1280, 120)
 
-    //op platform staan, moet hier door lokale variabelen PlatformX,Y
-    if( jumpstatus === true && 
-      spelerX - PlatformX > 50  &&  
-      spelerX - PlatformX < 50 && 
-      spelerY - PlatformY > 10 && 
-      spelerY - PlatformY < 10){
+  // alle platforms
+const PlatformX = [100, 350, 700]
+const PlatformY = [400, 300, 400]
+
+for(var i = 0; i < PlatformX.length; i++){
+    fill("green")
+    rect(PlatformX[i], PlatformY[i], PlatformBreedte, 20)
+    
+    // zorgt voor het staan op de platforms, 
+    // moet hier door array en lokale variabelen
+    if(spelerX - PlatformX[i] < 295  &&  
+       spelerX - PlatformX[i] > -15 && 
+       spelerY - PlatformY[i] < -23 && 
+       spelerY - PlatformY[i] > -30){
     jumpspeed = 0;
     jumpstatus = false;
-  };
-};
+    console.log("staan")
+    staan = true;
+    };
+
+    //vallen, moet ook hier door de array
+    if(staan === true && 
+      spelerX > PlatformX[i] &&  
+      spelerX < PlatformX[i] && 
+      spelerY - PlatformY[i] > -23 && 
+      spelerY - PlatformY[i] < -40){
+        console.log("vallen")
+        vallen = true;
+      
+      };
+    
+      if (vallen === true){
+        spelerY = spelerY - 1
+      };
+    
+    }
+
+     // vijand (later iets van spikes)
+     fill("black")
+     rect(vijandX - 15, vijandY - 25, 30, 50)
+     fill("red")
+     ellipse(vijandX, vijandY, 10, 10)
+   
+       // speler
+     fill("red")
+     rect(spelerX - 15, spelerY - 25, 30, 50)
+     fill("black")
+     ellipse(spelerX, spelerY, 10, 10)
+     
+}
+
 
 //level 2
 var tekenAlles2 = function () {
