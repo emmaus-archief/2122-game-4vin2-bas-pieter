@@ -35,6 +35,8 @@ var SpatieKlik = false;
 var SpatieKlikVorige = false;
 var vallen = false;
 var staan = false;
+var valSnelheid = false;
+var PlatformHoogte = 20;
 var PlatformBreedte = 280;
 var vijandX = 715; // x-positie van vijand
 var vijandY = 575; // y-positie van vijand
@@ -77,6 +79,18 @@ if(jumpstatus === true ){
 if(jumpstatus === true && spelerY > (570)){
   jumpspeed = 0;
   jumpstatus = false;
+  vallen = false;
+  valSnelheid = 0;
+}
+//stop met springen als die boven is
+if(jumpspeed < 0){
+  jumpstatus = false;
+  vallen = true;
+}
+//zwaartekracht
+if(vallen === true){
+  spelerY = spelerY - valSnelheid;
+  valSnelheid = valSnelheid - 0.2;
 }
 
 };
@@ -106,19 +120,19 @@ const PlatformY = [400, 300, 400]
 
 for(var i = 0; i < PlatformX.length; i++){
     fill("green")
-    rect(PlatformX[i], PlatformY[i], PlatformBreedte, 20)
+    rect(PlatformX[i], PlatformY[i], PlatformBreedte, PlatformHoogte)
     
     // zorgt voor het staan op de platforms, 
     // moet hier door array en lokale variabelen
     if(spelerX - PlatformX[i] < 295  &&  
        spelerX - PlatformX[i] > -15 && 
-       spelerY - PlatformY[i] < -25 && 
-       spelerY - PlatformY[i] > -30){
+       spelerY - PlatformY[i] < -23 && 
+       spelerY - PlatformY[i] > -25){
     jumpspeed = 0;
     jumpstatus = false;
     console.log("staan")
     staan = true;
-    };
+    }
 
     //vallen, moet ook hier door de array
     if(staan === true && 
@@ -166,7 +180,7 @@ const PlatformY = [400, 300, 400]
 
 for(var i = 0; i < PlatformX.length; i++){
     fill("green")
-    rect(PlatformX[i], PlatformY[i], PlatformBreedte, 20)
+    rect(PlatformX[i], PlatformY[i], PlatformBreedte, PlatformHoogte)
     
     // zorgt voor het staan op de platforms, 
     // moet hier door array en lokale variabelen
@@ -225,7 +239,7 @@ const PlatformY = [400, 300, 400]
 
 for(var i = 0; i < PlatformX.length; i++){
     fill("green")
-    rect(PlatformX[i], PlatformY[i], PlatformBreedte, 20)
+    rect(PlatformX[i], PlatformY[i], PlatformBreedte, PlatformHoogte)
     
     // zorgt voor het staan op de platforms, 
     // moet hier door array en lokale variabelen
