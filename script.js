@@ -112,7 +112,7 @@ for(var i = 0; i < PlatformX.length; i++){
     // moet hier door array en lokale variabelen
     if(spelerX - PlatformX[i] < 295  &&  
        spelerX - PlatformX[i] > -15 && 
-       spelerY - PlatformY[i] < -23 && 
+       spelerY - PlatformY[i] < -25 && 
        spelerY - PlatformY[i] > -30){
     jumpspeed = 0;
     jumpstatus = false;
@@ -154,65 +154,121 @@ for(var i = 0; i < PlatformX.length; i++){
 
 //level 2
 var tekenAlles2 = function () {
-  // alle platforms
-  const PlatformX = [100, 200, 300, 400]
-  const PlatformY = [100, 200, 300, 400]
-  
-    // achtergrond
-    fill("blue")
-    rect(0, 0, 1280, 600)
-    fill("green")
-    rect(0, 600, 1280, 120)
-  
-    for(var i = 0; i < PlatformX.length; i++){
-      fill("green")
-      rect(PlatformX[i], PlatformY[i], 280, 20)
-    }
-  
-    // vijand (later iets van spikes)
-    fill("black")
-    rect(vijandX - 15, vijandY - 25, 30, 50)
-    fill("red")
-    ellipse(vijandX, vijandY, 10, 10)
-  
-      // speler
-    fill("red")
-    rect(spelerX - 15, spelerY - 25, 30, 50)
-    fill("black")
-    ellipse(spelerX, spelerY, 10, 10)
- 
+  // achtergrond
+  fill("blue")
+  rect(0, 0, 1280, 600)
+  fill("green")
+  rect(0, 600, 1280, 120)
 
-};
+  // alle platforms
+const PlatformX = [100, 350, 700]
+const PlatformY = [400, 300, 400]
+
+for(var i = 0; i < PlatformX.length; i++){
+    fill("green")
+    rect(PlatformX[i], PlatformY[i], PlatformBreedte, 20)
+    
+    // zorgt voor het staan op de platforms, 
+    // moet hier door array en lokale variabelen
+    if(spelerX - PlatformX[i] < 295  &&  
+       spelerX - PlatformX[i] > -15 && 
+       spelerY - PlatformY[i] < -25 && 
+       spelerY - PlatformY[i] > -30){
+    jumpspeed = 0;
+    jumpstatus = false;
+    console.log("staan")
+    staan = true;
+    };
+
+    //vallen, moet ook hier door de array
+    if(staan === true && 
+      spelerX > PlatformX[i] &&  
+      spelerX < PlatformX[i] && 
+      spelerY - PlatformY[i] > -23 && 
+      spelerY - PlatformY[i] < -40){
+        console.log("vallen")
+        vallen = true;
+      
+      };
+    
+      if (vallen === true){
+        spelerY = spelerY - 1
+      };
+    
+    }
+
+     // vijand (later iets van spikes)
+     fill("black")
+     rect(vijandX - 15, vijandY - 25, 30, 50)
+     fill("red")
+     ellipse(vijandX, vijandY, 10, 10)
+   
+       // speler
+     fill("red")
+     rect(spelerX - 15, spelerY - 25, 30, 50)
+     fill("black")
+     ellipse(spelerX, spelerY, 10, 10)
+     
+}
 
 //level 3
 var tekenAlles3 = function () {
+  // achtergrond
+  fill("blue")
+  rect(0, 0, 1280, 600)
+  fill("green")
+  rect(0, 600, 1280, 120)
+
   // alle platforms
-  const PlatformX = [100, 200, 300, 400]
-  const PlatformY = [100, 200, 300, 400]
-  
-    // achtergrond
-    fill("blue")
-    rect(0, 0, 1280, 600)
+const PlatformX = [100, 350, 700]
+const PlatformY = [400, 300, 400]
+
+for(var i = 0; i < PlatformX.length; i++){
     fill("green")
-    rect(0, 600, 1280, 120)
-  
-    for(var i = 0; i < PlatformX.length; i++){
-      fill("green")
-      rect(PlatformX[i], PlatformY[i], 280, 20)
+    rect(PlatformX[i], PlatformY[i], PlatformBreedte, 20)
+    
+    // zorgt voor het staan op de platforms, 
+    // moet hier door array en lokale variabelen
+    if(spelerX - PlatformX[i] < 295  &&  
+       spelerX - PlatformX[i] > -15 && 
+       spelerY - PlatformY[i] < -25 && 
+       spelerY - PlatformY[i] > -30){
+    jumpspeed = 0;
+    jumpstatus = false;
+    console.log("staan")
+    staan = true;
+    };
+
+    //vallen, moet ook hier door de array
+    if(staan === true && 
+      spelerX > PlatformX[i] &&  
+      spelerX < PlatformX[i] && 
+      spelerY - PlatformY[i] > -23 && 
+      spelerY - PlatformY[i] < -40){
+        console.log("vallen")
+        vallen = true;
+      
+      };
+    
+      if (vallen === true){
+        spelerY = spelerY - 1
+      };
+    
     }
-  
-    // vijand (later iets van spikes)
-    fill("black")
-    rect(vijandX - 15, vijandY - 25, 30, 50)
-    fill("red")
-    ellipse(vijandX, vijandY, 10, 10)
-  
-      // speler
-    fill("red")
-    rect(spelerX - 15, spelerY - 25, 30, 50)
-    fill("black")
-    ellipse(spelerX, spelerY, 10, 10)
-};
+
+     // vijand (later iets van spikes)
+     fill("black")
+     rect(vijandX - 15, vijandY - 25, 30, 50)
+     fill("red")
+     ellipse(vijandX, vijandY, 10, 10)
+   
+       // speler
+     fill("red")
+     rect(spelerX - 15, spelerY - 25, 30, 50)
+     fill("black")
+     ellipse(spelerX, spelerY, 10, 10)
+     
+}
 
 //geeft true als vijand geraakt wordt
  var checkGameOver = function () {
