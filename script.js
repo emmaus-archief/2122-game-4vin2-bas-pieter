@@ -429,9 +429,17 @@ var StartScherm = function() {
  
   // de hulpknop
   fill("white");
-  rect(385,400,440,100);
+  rect(385,500,440,100);
   fill('black');
-  text("naar hulpmenu", 420, 460)
+  text("naar hulpmenu", 420, 560)
+
+  if(mouseIsPressed && 
+    mouseX < 1050 &&
+    mouseX > 385 &&
+    mouseY < 600 &&
+    mouseY > 500 ) {
+    spelStatus = HULP;
+  };
 
   // level 1 aanklikken
 
