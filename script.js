@@ -294,6 +294,8 @@ for(var i = 0; i < PlatformX.length; i++){
      spelerX - vijandX > -35 &&
      spelerY - vijandY < 50 &&
      spelerY - vijandY > -50) {
+
+  
        console.log("botsing");
       return true;
     }
@@ -480,6 +482,8 @@ function draw() {
     checkGameOver();
     tekenAlles1();
     if (checkGameOver()) {
+      spelerX = 615
+      spelerY = 575
       spelStatus = GAMEOVER;
     }
   }
@@ -490,6 +494,8 @@ function draw() {
     tekenAlles2();
     checkGameOver();
     if (checkGameOver()) {
+      spelerX = 615
+      spelerY = 575
       spelStatus = GAMEOVER;
     }
   }
@@ -500,6 +506,8 @@ function draw() {
     tekenAlles3();
     checkGameOver();
     if (checkGameOver()) {
+      spelerX = 615
+      spelerY = 575
       spelStatus = GAMEOVER;
     }
   }
