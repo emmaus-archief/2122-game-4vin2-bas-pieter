@@ -36,12 +36,12 @@ var botsing = false;
 var SpatieKlik = false;
 var SpatieKlikVorige = false;
 var vallen = false;
-var staan = false;
+var staan = true;
 var valSnelheid = false;
 var PlatformHoogte = 20;
 var PlatformBreedte = 280;
-var vijandX = 715; // x-positie van vijand
-var vijandY = 575; // y-positie van vijand
+var gameover = false;
+
 
 
 /* ********************************************* */
@@ -69,15 +69,16 @@ if(keyIsDown(KEY_D) && spelerX < 1265) {
 SpatieklikVorige = SpatieKlik;
 SpatieKlik = keyIsDown(KEY_SPACE);
 
-if( SpatieKlik === true && jumpstatus === false) {
+if( SpatieKlik === true && jumpstatus === false && staan === true) {
   jumpstatus = true;
-  jumpspeed = 20;
+  jumpspeed = 10;
   staan = false;
 }
 if(jumpstatus === true && jumpspeed > 0){
   spelerY = spelerY - jumpspeed;
   jumpspeed = jumpspeed - 0.2;
 }
+
 if((jumpstatus === true || vallen === true) && spelerY > (570)){
   jumpspeed = 0;
   jumpstatus = false;
@@ -86,20 +87,15 @@ if((jumpstatus === true || vallen === true) && spelerY > (570)){
   staan = true;
 }
 //stop met springen als die boven is
-if(jumpspeed === 0 ){
+if(jumpspeed < 0 ){
   jumpstatus = false;
   vallen = true;
 }
 
-if(vallen === true){
-  console.log("vallen")
-}
-
 //zwaartekracht
-if(vallen === true && staan === false){
+if(vallen === true){
   spelerY = spelerY - valSnelheid;
   valSnelheid = valSnelheid - 0.2;
-  console.log("vallen")
 }
 
 
@@ -123,36 +119,34 @@ for(var i = 0; i < PlatformX.length; i++){
     
     // zorgt voor het staan op de platforms, 
     // moet hier door array en lokale variabelen
-    if(spelerX - PlatformX[i] < 295  &&  
+    if(spelerX - PlatformX[i] < PlatformBreedte + 15  &&  
        spelerX - PlatformX[i] > -15 && 
        spelerY - PlatformY[i] < -23 && 
        spelerY - PlatformY[i] > -30){
     jumpspeed = 0;
     jumpstatus = false;
-    console.log("staan")
     staan = true;
-    } else {
-      staan = false;
-      console.log("staanuit")
+    vallen = false;
+    valSnelheid = 0;
     }
+  }
+// alle dodelijke platforms/spikes
+ const spikeX = [100, 600]
+const spikeY = [200, -400]
 
-    //vallen, moet ook hier door de array
-    /* if(staan === true &&   
-      spelerX < PlatformX[i] && 
-      spelerY < PlatformY[i] + 5 && 
-      spelerY > PlatformY[i] - 10){
-        console.log("vallen")
-        vallen = true;
-      } */
-      
-      
-    }
-
-     // vijand (later iets van spikes)
-     fill("black")
-     rect(vijandX - 15, vijandY - 25, 30, 50)
-     fill("red")
-     ellipse(vijandX, vijandY, 10, 10)
+for(var i = 0; i < spikeX.length; i++){
+  fill("red")
+  rect(spikeX[i], spikeY[i], 30, 50)
+  
+  // zorgt voor doodgaan
+  if(spelerX - spikeX[i] < 35 &&
+    spelerX - spikeX[i] > -35 &&
+    spelerY - spikeY[i] < 50 &&
+    spelerY - spikeY[i] > -50){
+  gameover = true;
+  console.log("dood"  )
+  } 
+} 
    
        // speler
      fill("red")
@@ -187,22 +181,11 @@ for(var i = 0; i < PlatformX.length; i++){
        spelerY - PlatformY[i] > -30){
     jumpspeed = 0;
     jumpstatus = false;
-    console.log("staan")
     staan = true;
+    vallen = false;
+    valSnelheid = 0;
     };
 
-    //vallen, moet ook hier door de array
-    if(staan === true && 
-      spelerX > PlatformX[i] + PlatformBreedte &&  
-      spelerX < PlatformX[i]  ){
-        console.log("vallen")
-        vallen = true;
-        staan = false;
-      }
-    
-      if (vallen === true){
-        spelerY = spelerY - 1
-      };
     
     }
 
@@ -244,24 +227,10 @@ for(var i = 0; i < PlatformX.length; i++){
        spelerY - PlatformY[i] > -30){
     jumpspeed = 0;
     jumpstatus = false;
-    console.log("staan")
     staan = true;
+    vallen = false;
+    valSnelheid = 0;
     };
-
-    //vallen, moet ook hier door de array
-    if(staan === true && 
-      spelerX > PlatformX[i] &&  
-      spelerX < PlatformX[i] && 
-      spelerY - PlatformY[i] > -23 && 
-      spelerY - PlatformY[i] < -40){
-        console.log("vallen")
-        vallen = true;
-      
-      };
-    
-      if (vallen === true){
-        spelerY = spelerY - 1
-      };
     
     }
 
@@ -281,13 +250,7 @@ for(var i = 0; i < PlatformX.length; i++){
 
 //geeft true als vijand geraakt wordt
  var checkGameOver = function () {
-  if(spelerX - vijandX < 35 &&
-     spelerX - vijandX > -35 &&
-     spelerY - vijandY < 50 &&
-     spelerY - vijandY > -50) {
-
-  
-       console.log("botsing");
+  if(gameover === true) {
       return true;
     }
   return false;
