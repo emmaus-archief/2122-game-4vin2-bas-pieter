@@ -28,6 +28,11 @@ var spelStatus = START;
 // speler
 var spelerX = 615; // x-positie van speler
 var spelerY = 575; // y-positie van speler
+
+//finishblok
+
+var finishX = 1000
+var finishY = -3100
 //alle andere dingen
 var speed = 10;
 var jumpspeed = 0;
@@ -41,7 +46,7 @@ var valSnelheid = false;
 var PlatformHoogte = 20;
 var PlatformBreedte = 280;
 var gameover = false;
-
+var finish = false;
 
 
 /* ********************************************* */
@@ -110,8 +115,8 @@ var tekenAlles1 = function () {
   rect(0, 600, 1280, 220)
 
   // alle platforms
-const PlatformX = [100, 350, 700]
-const PlatformY = [400, 300, 400]
+const PlatformX = [100, 350, 700, 100, 400, 600, 100, 200, 570, 340, 890, 120, 345, 733, 845, 123, 254, 901]
+const PlatformY = [400, 200, 0, -200, -400, -600, -800, -1000, -1200, -1400, -1600, -1800, -2000, -2200, -2400, -2600, -2800, -3000]
 
 for(var i = 0; i < PlatformX.length; i++){
     fill("green")
@@ -131,28 +136,42 @@ for(var i = 0; i < PlatformX.length; i++){
     }
   }
 // alle dodelijke platforms/spikes
- const spikeX = [100, 600]
-const spikeY = [200, -400]
+ const spikeX = [350, 600]
+const spikeY = [190, -400]
 
 for(var i = 0; i < spikeX.length; i++){
   fill("red")
-  rect(spikeX[i], spikeY[i], 30, 50)
+  rect(spikeX[i], spikeY[i], 80, 10)
   
   // zorgt voor doodgaan
-  if(spelerX - spikeX[i] < 35 &&
-    spelerX - spikeX[i] > -35 &&
-    spelerY - spikeY[i] < 50 &&
-    spelerY - spikeY[i] > -50){
+  if(spelerX - spikeX[i] < 85 &&
+    spelerX - spikeX[i] > 5 &&
+    spelerY - spikeY[i] < 25 &&
+    spelerY - spikeY[i] > -25){
   gameover = true;
-  console.log("dood"  )
   } 
 } 
    
+
+if(spelerX - finishX < 100 &&
+  spelerX - finishX > -100  &&
+  spelerY - finishY < 100  &&
+  spelerY - finishY > -100 ) {
+    finish = true;
+
+  }
+
+
+     fill("white")
+     rect(finishX, finishY, 100, 100)
+
        // speler
      fill("red")
      rect(spelerX - 15, spelerY - 25, 30, 50)
      fill("black")
      ellipse(spelerX, spelerY, 10, 10)
+
+ 
      
 }
 
@@ -191,9 +210,9 @@ for(var i = 0; i < PlatformX.length; i++){
 
      // vijand (later iets van spikes)
      fill("black")
-     rect(vijandX - 15, vijandY - 25, 30, 50)
+     rect(spikeX - 15, spikeY - 25, 30, 50)
      fill("red")
-     ellipse(vijandX, vijandY, 10, 10)
+     ellipse(spikeX, spikeY, 10, 10)
    
        // speler
      fill("red")
@@ -255,6 +274,14 @@ for(var i = 0; i < PlatformX.length; i++){
     }
   return false;
 }; 
+
+ var CheckFinish = function(){
+if(finish === true) {
+
+  return true;
+}
+return false;
+ }
 
 function moveLevel(){ 
   if (spelerY > 360); 
@@ -363,6 +390,31 @@ var HulpScherm = function() {
   };
 }
 
+// finish scherm tekenen
+var finishScherm = function() {
+
+  // achtergrond
+  fill("yellow");
+  rect(0,0,1280,720);
+
+  // titel spel
+  textSize(50);
+  fill("black");
+  text("Level Gehaald", 490, 100 )
+
+  fill('white');
+  rect(600, 345, 450, 100);
+  fill('black');
+  text("naar hoodmenu", 610, 410)
+
+  if(mouseIsPressed && 
+    mouseX < 1050 &&
+    mouseX > 600 &&
+    mouseY < 450 &&
+    mouseY > 345 ) {
+    spelStatus = START;
+  };
+}
 
 
 // startscherm tekenen
@@ -442,11 +494,17 @@ function draw() {
     moveLevel();
     beweegAlles();
     checkGameOver();
+    CheckFinish();
     tekenAlles1();
     if (checkGameOver()) {
-      spelerX = 615
-      spelerY = 575
+      spelerX = 615;
+      spelerY = 575;
       spelStatus = GAMEOVER;
+    }
+
+    if(CheckFinish()) {
+      spelStatus = FINISH;
+
     }
   }
 
@@ -456,8 +514,7 @@ function draw() {
     tekenAlles2();
     checkGameOver();
     if (checkGameOver()) {
-      spelerX = 615
-      spelerY = 575
+
       spelStatus = GAMEOVER;
     }
   }
@@ -468,13 +525,14 @@ function draw() {
     tekenAlles3();
     checkGameOver();
     if (checkGameOver()) {
-      spelerX = 615
-      spelerY = 575
+ 
       spelStatus = GAMEOVER;
     }
   }
 
   if (spelStatus === GAMEOVER) {
+ spelerX = 615;
+ spelerY = 575;
     // teken game-over scherm
     GameoverScherm();
   }
@@ -491,7 +549,7 @@ function draw() {
 
   if(spelStatus === FINISH) {
     //tekent finish scherm
-
+    finishScherm();
   }
 }
 
