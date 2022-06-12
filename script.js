@@ -115,7 +115,7 @@ var tekenAlles1 = function () {
   rect(0, 600, 1280, 220)
 
   // alle platforms
-const PlatformX = [100, 350, 700, 100, 400, 600, 100, 200, 570, 340, 890, 120, 345, 733, 845, 123, 254, 901]
+const PlatformX = [100, 650, 300, 600, 420, 610, 12, 900, 570, 340, 890, 120, 345, 733, 845, 123, 254, 901]
 const PlatformY = [400, 200, 0, -200, -400, -600, -800, -1000, -1200, -1400, -1600, -1800, -2000, -2200, -2400, -2600, -2800, -3000]
 
 for(var i = 0; i < PlatformX.length; i++){
@@ -136,8 +136,8 @@ for(var i = 0; i < PlatformX.length; i++){
     }
   }
 // alle dodelijke platforms/spikes
- const spikeX = [350, 600]
-const spikeY = [190, -400]
+ const spikeX = [250, 700, 400, 600, 500, 670, 100, 933, 623, 551, 910, 300]
+const spikeY = [400 - 10, 200- 10, 0- 10, -200- 10, -400- 10, -600- 10, -800- 10, -1000- 10, -1200- 10, -1400- 10, -1600- 10, -1800- 10, -2000- 10, -2200- 10, -2400- 10, -2600- 10, -2800- 10, -3000- 10]
 
 for(var i = 0; i < spikeX.length; i++){
   fill("red")
@@ -145,7 +145,7 @@ for(var i = 0; i < spikeX.length; i++){
   
   // zorgt voor doodgaan
   if(spelerX - spikeX[i] < 85 &&
-    spelerX - spikeX[i] > 5 &&
+    spelerX - spikeX[i] > -10 &&
     spelerY - spikeY[i] < 25 &&
     spelerY - spikeY[i] > -25){
   gameover = true;
@@ -185,8 +185,8 @@ var tekenAlles2 = function () {
   rect(0, 600, 1280, 220)
 
   // alle platforms
-const PlatformX = [0  , 350, 700, 0   , 350 , 700 , 0   , 350 ]
-const PlatformY = [400, 200, 0  , -200, -400, -600, -800, -1000]
+const PlatformX = [100, 350, 700, 100, 400, 600, 100, 200, 570, 340, 890, 120, 345, 733, 845, 123, 254, 901]
+const PlatformY = [400, 200, 0, -200, -400, -600, -800, -1000, -1200, -1400, -1600, -1800, -2000, -2200, -2400, -2600, -2800, -3000]
 
 for(var i = 0; i < PlatformX.length; i++){
     fill("green")
@@ -194,31 +194,54 @@ for(var i = 0; i < PlatformX.length; i++){
     
     // zorgt voor het staan op de platforms, 
     // moet hier door array en lokale variabelen
-    if(spelerX - PlatformX[i] < 295  &&  
+    if(spelerX - PlatformX[i] < PlatformBreedte + 15  &&  
        spelerX - PlatformX[i] > -15 && 
-       spelerY - PlatformY[i] < -25 && 
+       spelerY - PlatformY[i] < -23 && 
        spelerY - PlatformY[i] > -30){
     jumpspeed = 0;
     jumpstatus = false;
     staan = true;
     vallen = false;
     valSnelheid = 0;
-    };
-
-    
     }
+  }
+// alle dodelijke platforms/spikes
+ const spikeX = [360, 700, 430, 670, 200, 567, 355, 735]
+const spikeY = [200 - 10, 0- 10, -400- 10, -600- 10, -1000- 10, -1200- 10, -2000- 10, -2200- 10, ]
 
-     // vijand (later iets van spikes)
-     fill("black")
-     rect(spikeX - 15, spikeY - 25, 30, 50)
-     fill("red")
-     ellipse(spikeX, spikeY, 10, 10)
+for(var i = 0; i < spikeX.length; i++){
+  fill("red")
+  rect(spikeX[i], spikeY[i], 80, 10)
+  
+  // zorgt voor doodgaan
+  if(spelerX - spikeX[i] < 85 &&
+    spelerX - spikeX[i] > -10 &&
+    spelerY - spikeY[i] < 25 &&
+    spelerY - spikeY[i] > -25){
+  gameover = true;
+  } 
+} 
    
+
+if(spelerX - finishX < 100 &&
+  spelerX - finishX > -100  &&
+  spelerY - finishY < 100  &&
+  spelerY - finishY > -100 ) {
+    finish = true;
+
+  }
+
+
+     fill("white")
+     rect(finishX, finishY, 100, 100)
+
        // speler
      fill("red")
      rect(spelerX - 15, spelerY - 25, 30, 50)
      fill("black")
      ellipse(spelerX, spelerY, 10, 10)
+
+ 
      
 }
 
@@ -231,8 +254,8 @@ var tekenAlles3 = function () {
   rect(0, 600, 1280, 220)
 
   // alle platforms
-const PlatformX = [100, 350, 700]
-const PlatformY = [400, 300, 400]
+const PlatformX = [100, 850, 20, 400, 900, 300, 100, 900, 570, 40, 890, 120, 905, 3, 845, 123, 4, 901]
+const PlatformY = [400, 200, 0, -200, -400, -600, -800, -1000, -1200, -1400, -1600, -1800, -2000, -2200, -2400, -2600, -2800, -3000]
 
 for(var i = 0; i < PlatformX.length; i++){
     fill("green")
@@ -240,30 +263,54 @@ for(var i = 0; i < PlatformX.length; i++){
     
     // zorgt voor het staan op de platforms, 
     // moet hier door array en lokale variabelen
-    if(spelerX - PlatformX[i] < 295  &&  
+    if(spelerX - PlatformX[i] < PlatformBreedte + 15  &&  
        spelerX - PlatformX[i] > -15 && 
-       spelerY - PlatformY[i] < -25 && 
+       spelerY - PlatformY[i] < -23 && 
        spelerY - PlatformY[i] > -30){
     jumpspeed = 0;
     jumpstatus = false;
     staan = true;
     vallen = false;
     valSnelheid = 0;
-    };
-    
     }
+  }
+// alle dodelijke platforms/spikes
+ const spikeX = [300, 850, 220, 400, 930, 450, 300, 920, 570, 340, 890, 120, 905, 3, 845, 123, 4, 901]
+const spikeY = [400 - 10, 200- 10, 0- 10, -200- 10, -400- 10, -600- 10, -800- 10, -1000- 10, -1200- 10, -1400- 10, -1600- 10, -1800- 10, -2000- 10, -2200- 10, -2400- 10, -2600- 10, -2800- 10, -3000- 10]
 
-     // vijand (later iets van spikes)
-     fill("black")
-     rect(vijandX - 15, vijandY - 25, 30, 50)
-     fill("red")
-     ellipse(vijandX, vijandY, 10, 10)
+for(var i = 0; i < spikeX.length; i++){
+  fill("red")
+  rect(spikeX[i], spikeY[i], 80, 10)
+  
+  // zorgt voor doodgaan
+  if(spelerX - spikeX[i] < 85 &&
+    spelerX - spikeX[i] > -10 &&
+    spelerY - spikeY[i] < 25 &&
+    spelerY - spikeY[i] > -25){
+  gameover = true;
+  } 
+} 
    
+
+if(spelerX - finishX < 100 &&
+  spelerX - finishX > -100  &&
+  spelerY - finishY < 100  &&
+  spelerY - finishY > -100 ) {
+    finish = true;
+
+  }
+
+
+     fill("white")
+     rect(finishX, finishY, 100, 100)
+
        // speler
      fill("red")
      rect(spelerX - 15, spelerY - 25, 30, 50)
      fill("black")
      ellipse(spelerX, spelerY, 10, 10)
+
+ 
      
 }
 
@@ -312,24 +359,17 @@ function setup() {
   text("Je zuigt", 500, 100 )
 
   fill("white");
-  var y=220
+  var y=345
   while (y<=550) {
   rect(375, y, 450, 100);
   y+=125; }
   fill("black");
-  text("opnieuw proberen", 400, 285 );
   text("naar hoofdmenu", 418, 405 );
   text("naar hulpmenu", 430, 535 );
 
    // opnieuw proberen
 
-  if(mouseIsPressed && 
-    mouseX < 825 &&
-    mouseX > 375 &&
-    mouseY < 320 &&
-    mouseY > 220 ) {
-    spelStatus = SPELEN1;
-  };
+
 
   //naar startmenu gaan
 
@@ -403,13 +443,13 @@ var finishScherm = function() {
   text("Level Gehaald", 490, 100 )
 
   fill('white');
-  rect(600, 345, 450, 100);
+  rect(400, 345, 450, 100);
   fill('black');
-  text("naar hoodmenu", 610, 410)
+  text("naar hoodmenu", 410, 410)
 
   if(mouseIsPressed && 
-    mouseX < 1050 &&
-    mouseX > 600 &&
+    mouseX < 1150 &&
+    mouseX > 400 &&
     mouseY < 450 &&
     mouseY > 345 ) {
     spelStatus = START;
@@ -504,7 +544,8 @@ function draw() {
 
     if(CheckFinish()) {
       spelStatus = FINISH;
-
+      spelerX = 615;
+      spelerY = 575;
     }
   }
 
@@ -512,10 +553,17 @@ function draw() {
     moveLevel();
     beweegAlles();
     tekenAlles2();
+    CheckFinish();
     checkGameOver();
     if (checkGameOver()) {
-
+      spelerX = 615;
+      spelerY = 575;
       spelStatus = GAMEOVER;
+    }
+    if(CheckFinish()) {
+      spelStatus = FINISH;
+      spelerX = 615;
+      spelerY = 575;
     }
   }
 
@@ -523,10 +571,18 @@ function draw() {
     moveLevel();
     beweegAlles();
     tekenAlles3();
+    CheckFinish();
     checkGameOver();
     if (checkGameOver()) {
  
       spelStatus = GAMEOVER;
+      spelerX = 615;
+      spelerY = 575;
+    }
+    if(CheckFinish()) {
+      spelStatus = FINISH;
+      spelerX = 615;
+      spelerY = 575;
     }
   }
 
